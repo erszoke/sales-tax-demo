@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemParserTest {
 
-    private ItemParser itemParser = new ItemParser();;
+    private final ItemParser itemParser = new ItemParser();;
 
     @Test
     public void testEmptyAndNullInput(){
@@ -24,6 +24,11 @@ class ItemParserTest {
     @Test
     public void testInputStartsWithOneDigit(){
         assertTrue(itemParser.matches("1 choco at 1.00"));
+    }
+
+    @Test
+    public void testInputStartsWithOneDigit2(){
+        assertTrue(itemParser.matches("1 imported choco at 1.00"));
     }
 
     @Test
