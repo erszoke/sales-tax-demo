@@ -13,22 +13,14 @@ public class ItemParser {
     private static final int INDEX_OF_UNIT_PRICE = 5;
 
     private static final String  IMPORTED = "imported";
-
-    public boolean matches(String itemString){
-        if(itemString == null || itemString.isEmpty()) {
-            return false;
-        } else {
-            return PATTERN.matcher(itemString).matches();
-        }
-    }
-
     public ParsedItem parseString(String itemString){
-        Matcher matcher = PATTERN.matcher(itemString);
-        if(matcher.matches()) {
-            return createParsedItem(matcher);
-        } else {
-            return null;
+        if(itemString != null && !itemString.isEmpty()) {
+            Matcher matcher = PATTERN.matcher(itemString);
+            if (matcher.matches()) {
+                return createParsedItem(matcher);
+            }
         }
+        return null;
     }
 
     private ParsedItem createParsedItem(Matcher matcher) {
@@ -51,7 +43,8 @@ public class ItemParser {
     }
     public static class ParsedItem {
 
-        protected ParsedItem(){}
+        private ParsedItem(){}
+
         private String productInfo;
         private boolean isImported;
         private int amount;

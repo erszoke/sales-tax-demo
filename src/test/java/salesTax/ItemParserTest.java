@@ -2,8 +2,9 @@ package salesTax;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ItemParserTest {
 
@@ -11,99 +12,132 @@ class ItemParserTest {
 
     @Test
     public void testEmptyAndNullInput(){
-        assertFalse(itemParser.matches(""));
-        assertFalse(itemParser.matches(null));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("");
+        assertNull(parsedItem);
+        ItemParser.ParsedItem parsedItem2 = itemParser.parseString(null);
+        assertNull(parsedItem2);
     }
 
     @Test
     public void testInputStartsWithZero(){
-        assertFalse(itemParser.matches("0 choco at 1.00"));
-        assertFalse(itemParser.matches("01 choco at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("0 choco at 1.00");
+        assertNull(parsedItem);
+        ItemParser.ParsedItem parsedItem2 = itemParser.parseString("01 choco at 1.00");
+        assertNull(parsedItem2);
     }
 
     @Test
     public void testInputStartsWithOneDigit(){
-        assertTrue(itemParser.matches("1 choco at 1.00"));
+         ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 1.00");
+         assertEquals(1, parsedItem.getAmount());
+         assertFalse(parsedItem.isImported());
+         assertEquals(0, BigDecimal.ONE.compareTo(parsedItem.getUnitPrice()));
+         assertEquals("choco", parsedItem.getProductInfo());
     }
 
     @Test
-    public void testInputStartsWithOneDigit2(){
-        assertTrue(itemParser.matches("1 imported choco at 1.00"));
+    public void testInputStartsWithOneDigitImported(){
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 imported choco at 1.00");
+        assertEquals(1, parsedItem.getAmount());
+        assertTrue(parsedItem.isImported());
     }
 
     @Test
     public void testFailOnStartsNegative(){
-        assertFalse(itemParser.matches("-1 choco at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("-1 choco at 1.00");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testInputStartsWithTwoDigits(){
-        assertTrue(itemParser.matches("12 choco at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("12 choco at 1.00");
+        assertEquals(12, parsedItem.getAmount());
     }
 
     @Test
     public void testInputStartsWithThreeDigits(){
-        assertTrue(itemParser.matches("123 choco at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("123 choco at 1.00");
+        assertEquals(123, parsedItem.getAmount());
     }
 
     @Test
     public void testFailOnStartsWithTooBig(){
-        assertFalse(itemParser.matches("1234 choco at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1234 choco at 1.00");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testFailOnEndsWithMissingZeros(){
-        assertFalse(itemParser.matches("1 choco at 1"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 1");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testFailOnEndsWithMissingAZero(){
-        assertFalse(itemParser.matches("1 choco at 1.0"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 1.0");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testFailOnEndsWithNonDigit(){
-        assertFalse(itemParser.matches("1 choco at 1."));
-        assertFalse(itemParser.matches("1 choco at 1.00 "));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 1.");
+        assertNull(parsedItem);
+        ItemParser.ParsedItem parsedItem2 = itemParser.parseString("1 choco at 1.00 ");
+        assertNull(parsedItem2);
     }
 
     @Test
     public void testInputEndsWithTwoDigits(){
-        assertTrue(itemParser.matches("1 choco at 12.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 12.25");
+        assertFalse(parsedItem.isImported());
+        assertEquals(1, parsedItem.getAmount());
+        assertEquals(0, BigDecimal.valueOf(12.25d).compareTo(parsedItem.getUnitPrice()));
+        assertEquals("choco", parsedItem.getProductInfo());
     }
 
     @Test
     public void testInputEndsWithThreeDigits(){
-        assertTrue(itemParser.matches("1 choco at 123.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 123.00");
+        assertFalse(parsedItem.isImported());
+        assertEquals(0, BigDecimal.valueOf(123d).compareTo(parsedItem.getUnitPrice()));
     }
 
     @Test
     public void testInputFailOnEndsTooBig(){
-        assertFalse(itemParser.matches("1 choco at 12345.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 12345.00");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testInputFailOnEndsTooLong(){
-        assertFalse(itemParser.matches("1 choco at 1.001"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 choco at 1.001");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testFailOnMissingInnerPart(){
-        assertFalse(itemParser.matches("1 at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 at 1.00");
+        assertNull(parsedItem);
     }
 
     @Test
-    public void testFailOnWhiteSpacetInnerPart(){
-        assertFalse(itemParser.matches("1   at 1.00"));
+    public void testFailOnWhiteSpaceInInnerPart(){
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1   at 1.00");
+        assertNull(parsedItem);
     }
 
     @Test
     public void testFailOnInnerDigit(){
-        assertFalse(itemParser.matches("1 one 1 at 1.00"));
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 one 1 at 1.00");
+        assertNull(parsedItem);
     }
 
     @Test
-    public void testLongInput(){
-        assertTrue(itemParser.matches("1 imported bottle of perfume at 10.00"));
+    public void testLongerInput(){
+        ItemParser.ParsedItem parsedItem = itemParser.parseString("1 imported bottle of perfume at 10.00");
+        assertTrue(parsedItem.isImported());
+        assertEquals(1, parsedItem.getAmount());
+        assertEquals(0, BigDecimal.TEN.compareTo(parsedItem.getUnitPrice()));
+        assertEquals("imported bottle of perfume", parsedItem.getProductInfo());
     }
 }
