@@ -31,8 +31,8 @@ public class Calculator {
             return BigDecimal.ZERO;
         }
         BigDecimal tax = unitPrice
-                .multiply(BigDecimal.valueOf(taxRatePct))
-                .divide(ONE_HUNDRED, RoundingMode.HALF_UP);
+                .multiply(BigDecimal.valueOf(taxRatePct)).setScale(2, ROUNDING_MODE)
+                .divide(ONE_HUNDRED, ROUNDING_MODE);
 
         //rounding up for nearest 0.05
         return tax.multiply(TWENTY).setScale(0, RoundingMode.UP)

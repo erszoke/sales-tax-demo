@@ -47,13 +47,13 @@ class CalculatorTest {
     }
 
     @Test
-    void calcBasketItemNoTaxAndAdditionalTax3() {
+    void calcBasketItemTaxAndAdditionalTaxWithRounding() {
         BasketItem item = new BasketItem(1, BigDecimal.valueOf(47.50), TaxRatePct.GENERAL);
         item.setAdditionalTaxRate(TaxRatePct.IMPORTED);
 
         BigDecimal taxRate = calculator.calcTaxRate(item);
 
-        assertEquals(0, BigDecimal.valueOf(7.2d).compareTo(taxRate));
+        assertEquals(0, BigDecimal.valueOf(7.15d).compareTo(taxRate));
     }
 
     @Test

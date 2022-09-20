@@ -48,6 +48,6 @@ class ItemServiceTest {
         ItemParser parser = new ItemParser();
         ItemParser.ParsedItem parsedItem = parser.parseString("1 box of imported chocolates at 11.25");
         BasketItem item = itemService.createBasketItem(parsedItem);
-        assertEquals(BigDecimal.valueOf(11.85d), item.getGrossPrice());
+        assertEquals(0, BigDecimal.valueOf(11.85d).compareTo(item.getGrossPrice()));
     }
 }
