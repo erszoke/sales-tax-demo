@@ -1,9 +1,9 @@
-package salesTax.service;
+package com.demo.salesTax.service;
 
-import salesTax.model.BasketItem;
-import salesTax.model.TaxRatePct;
-import salesTax.model.category.CategoryProvider;
-import salesTax.model.category.GoodsCategory;
+import com.demo.salesTax.model.BasketItem;
+import com.demo.salesTax.model.TaxRatePct;
+import com.demo.salesTax.model.category.CategoryProvider;
+import com.demo.salesTax.model.category.GoodsCategory;
 
 import java.math.BigDecimal;
 import java.util.Objects;

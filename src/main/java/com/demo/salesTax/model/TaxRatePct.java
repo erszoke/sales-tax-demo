@@ -1,4 +1,4 @@
-package salesTax.model;
+package com.demo.salesTax.model;
 
 public enum TaxRatePct {
 

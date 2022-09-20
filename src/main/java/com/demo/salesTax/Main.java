@@ -1,6 +1,6 @@
-package salesTax;
+package com.demo.salesTax;
 
-import salesTax.service.ShoppingBasketService;
+import com.demo.salesTax.service.ShoppingBasketService;
 
 import java.util.List;
 import java.util.Objects;

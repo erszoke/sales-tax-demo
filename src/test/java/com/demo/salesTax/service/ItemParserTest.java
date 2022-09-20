@@ -1,4 +1,4 @@
-package salesTax.service;
+package com.demo.salesTax.service;
 
 import org.junit.jupiter.api.Test;
 

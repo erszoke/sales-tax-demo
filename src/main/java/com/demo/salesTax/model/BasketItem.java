@@ -1,4 +1,4 @@
-package salesTax.model;
+package com.demo.salesTax.model;
 
 import java.math.BigDecimal;
 

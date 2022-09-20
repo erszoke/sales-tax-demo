@@ -1,6 +1,6 @@
-package salesTax.model.category;
+package com.demo.salesTax.model.category;
 
-import salesTax.model.TaxRatePct;
+import com.demo.salesTax.model.TaxRatePct;
 
 import java.util.HashSet;
 import java.util.Set;

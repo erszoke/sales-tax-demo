@@ -1,6 +1,6 @@
-package salesTax.service;
+package com.demo.salesTax.service;
 
-import salesTax.model.BasketItem;
+import com.demo.salesTax.model.BasketItem;
 
 import java.math.BigDecimal;
 import java.util.Collection;

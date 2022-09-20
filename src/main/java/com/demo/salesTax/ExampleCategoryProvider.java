@@ -1,6 +1,6 @@
-package salesTax;
+package com.demo.salesTax;
 
-import salesTax.model.category.*;
+import com.demo.salesTax.model.category.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

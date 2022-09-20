@@ -1,7 +1,7 @@
-package salesTax.service;
+package com.demo.salesTax.service;
 
-import salesTax.model.BasketItem;
-import salesTax.model.category.CategoryProvider;
+import com.demo.salesTax.model.BasketItem;
+import com.demo.salesTax.model.category.CategoryProvider;
 
 import java.util.ArrayList;
 import java.util.List;
