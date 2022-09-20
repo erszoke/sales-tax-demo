@@ -8,6 +8,8 @@ public class Calculator {
     private static final int SCALE = 2;
     private final static RoundingMode ROUNDING_MODE = RoundingMode.HALF_UP;
     private final static BigDecimal ONE_HUNDRED = BigDecimal.valueOf(100L).setScale(SCALE);
+    // 5/100 reciprocal 100/5=20
+    private final static BigDecimal TWENTY = BigDecimal.valueOf(20);
 
     public BigDecimal calcTaxRate(BasketItem basketItem){
         BigDecimal salesTax = calcSalesTax(basketItem.getTaxRate().getTaxRatePct(), basketItem.getUnitNetPrice());
@@ -25,8 +27,12 @@ public class Calculator {
         if(TaxRatePct.NO_TAX.getTaxRatePct() == taxRatePct){
             return BigDecimal.ZERO;
         }
-        return unitPrice
-                .multiply(BigDecimal.valueOf(taxRatePct).setScale(SCALE))
-                .divide(ONE_HUNDRED, ROUNDING_MODE);
+        BigDecimal tax = unitPrice
+                .multiply(BigDecimal.valueOf(taxRatePct))
+                .divide(ONE_HUNDRED, RoundingMode.HALF_UP);
+
+        //rounding up for nearest 0.05
+        return tax.multiply(TWENTY).setScale(0, RoundingMode.UP)
+                .divide(TWENTY, 2, ROUNDING_MODE);
     }
 }

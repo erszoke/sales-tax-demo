@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
-
     @Test
     void calcBasketItemNoTax() {
         BasketItem item = new BasketItem(BigDecimal.valueOf(12.49d), TaxRatePct.NO_TAX, null);
@@ -33,6 +32,14 @@ class CalculatorTest {
         BigDecimal taxRate = calculator.calcTaxRate(item);
 
         assertEquals(0, BigDecimal.valueOf(0.5d).compareTo(taxRate));
+    }
+
+    @Test
+    void calcTaxRounding() {
+        BigDecimal taxRate = calculator
+                .calcSalesTax( TaxRatePct.IMPORTED.getTaxRatePct(), BigDecimal.valueOf(11.25d));
+
+        assertEquals(0, BigDecimal.valueOf(0.6d).compareTo(taxRate));
     }
 
     @Test
