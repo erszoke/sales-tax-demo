@@ -11,7 +11,7 @@ class CalculatorTest {
 
     @Test
     void calcBasketItemNoTax() {
-        BasketItem item = new BasketItem(BigDecimal.valueOf(12.49d), TaxRatePct.NO_TAX, null);
+        BasketItem item = new BasketItem(1, BigDecimal.valueOf(12.49d), TaxRatePct.NO_TAX);
         BigDecimal taxRate = calculator
                 .calcTaxRate(item);
 
@@ -20,15 +20,17 @@ class CalculatorTest {
 
     @Test
     void calcBasketItemGeneralTax() {
-        BasketItem item = new BasketItem(BigDecimal.valueOf(12.49d), TaxRatePct.GENERAL, null);
+        BasketItem item = new BasketItem(1, BigDecimal.valueOf(12.49d), TaxRatePct.GENERAL);
         BigDecimal taxRate = calculator.calcTaxRate(item);
 
         assertEquals(0, BigDecimal.valueOf(1.25d).compareTo(taxRate));
     }
 
     @Test
-    void calcBasketItemNoTaxAndAdditionalTax() {
-        BasketItem item = new BasketItem(BigDecimal.valueOf(10d), TaxRatePct.NO_TAX,TaxRatePct.IMPORTED);
+    void calcBasketItemNoTaxAndAdditionalTax1() {
+        BasketItem item = new BasketItem(1, BigDecimal.valueOf(10d), TaxRatePct.NO_TAX);
+        item.setAdditionalTaxRate(TaxRatePct.IMPORTED);
+
         BigDecimal taxRate = calculator.calcTaxRate(item);
 
         assertEquals(0, BigDecimal.valueOf(0.5d).compareTo(taxRate));
@@ -43,8 +45,20 @@ class CalculatorTest {
     }
 
     @Test
+    void calcBasketItemNoTaxAndAdditionalTax3() {
+        BasketItem item = new BasketItem(1, BigDecimal.valueOf(47.50), TaxRatePct.GENERAL);
+        item.setAdditionalTaxRate(TaxRatePct.IMPORTED);
+
+        BigDecimal taxRate = calculator.calcTaxRate(item);
+
+        assertEquals(0, BigDecimal.valueOf(7.2d).compareTo(taxRate));
+    }
+
+    @Test
     void calcBasketItemGeneralAndAdditionalTax() {
-        BasketItem item = new BasketItem(BigDecimal.valueOf(27.99d), TaxRatePct.GENERAL, TaxRatePct.IMPORTED);
+        BasketItem item = new BasketItem(1, BigDecimal.valueOf(27.99d), TaxRatePct.GENERAL);
+        item.setAdditionalTaxRate(TaxRatePct.IMPORTED);
+
         BigDecimal taxRate = calculator
                 .calcTaxRate(item);
 

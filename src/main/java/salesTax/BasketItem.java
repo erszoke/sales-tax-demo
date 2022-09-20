@@ -10,21 +10,11 @@ public class BasketItem {
     private  BigDecimal unitNetPrice;
     private BigDecimal taxSales;
     private BigDecimal grossPrice;
+    private String product;
 
-
-    public BasketItem(){}
-
-    public BasketItem(int amount, BigDecimal unitNetPrice, TaxRatePct taxRatePct, TaxRatePct additionalTaxRatePct) {
+    public BasketItem(int amount, BigDecimal unitNetPrice, TaxRatePct taxRatePct) {
         this.amount = amount;
         this.taxRatePct = taxRatePct;
-        this.additionalTaxRatePct = additionalTaxRatePct;
-        this.unitNetPrice = unitNetPrice;
-    }
-
-    public BasketItem(BigDecimal unitNetPrice, TaxRatePct taxRatePct, TaxRatePct additionalTaxRatePct) {
-        this.amount = 1;
-        this.taxRatePct = taxRatePct;
-        this.additionalTaxRatePct = additionalTaxRatePct;
         this.unitNetPrice = unitNetPrice;
     }
 
@@ -74,5 +64,13 @@ public class BasketItem {
 
     public void setGrossPrice(BigDecimal grossPrice) {
         this.grossPrice = grossPrice;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getProduct() {
+        return product;
     }
 }
