@@ -1,4 +1,4 @@
-package salesTax;
+package salesTax.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

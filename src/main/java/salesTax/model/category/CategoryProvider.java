@@ -1,4 +1,4 @@
-package salesTax;
+package salesTax.model.category;
 
 import java.util.List;
 

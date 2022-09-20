@@ -1,4 +1,7 @@
-package salesTax;
+package salesTax.service;
+
+import salesTax.model.BasketItem;
+import salesTax.model.TaxRatePct;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

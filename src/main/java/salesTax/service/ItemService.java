@@ -1,4 +1,9 @@
-package salesTax;
+package salesTax.service;
+
+import salesTax.model.BasketItem;
+import salesTax.model.TaxRatePct;
+import salesTax.model.category.CategoryProvider;
+import salesTax.model.category.GoodsCategory;
 
 import java.math.BigDecimal;
 import java.util.Objects;

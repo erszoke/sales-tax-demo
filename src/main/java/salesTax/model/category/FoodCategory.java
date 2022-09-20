@@ -1,4 +1,6 @@
-package salesTax;
+package salesTax.model.category;
+
+import salesTax.model.TaxRatePct;
 
 import java.util.Set;
 

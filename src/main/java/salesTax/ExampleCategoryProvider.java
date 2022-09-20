@@ -1,5 +1,7 @@
 package salesTax;
 
+import salesTax.model.category.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

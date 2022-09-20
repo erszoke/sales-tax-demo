@@ -1,6 +1,9 @@
-package salesTax;
+package salesTax.service;
 
 import org.junit.jupiter.api.Test;
+import salesTax.ExampleCategoryProvider;
+import salesTax.model.BasketItem;
+import salesTax.model.TaxRatePct;
 
 import java.math.BigDecimal;
 
