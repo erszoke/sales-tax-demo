@@ -19,6 +19,7 @@ This application demonstrates making a receipt for a shopping basket with a cash
 - categorizes items in the basket
 - calculate tax and gross price for individual items
 - gives the total of taxes and gross prices
+- prints out the receipt details of the predefined test data set
 
 ### Assumptions and rules
 
