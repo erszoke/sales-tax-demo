@@ -3,7 +3,7 @@
 ### Run the project
 - Make sure to be in the root directory
 - Clean and build the project, run the command:
-```aidl
+```
 mvn package
 ```
 This will also generate a jar file with all the dependencies which we will run once
